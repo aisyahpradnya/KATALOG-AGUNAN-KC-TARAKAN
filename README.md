@@ -1,44 +1,73 @@
-# KATALOG-AGUNAN-KC-TARAKAN
+# KATALOG AGUNAN KC TARAKAN
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Manajemen Agunan</title>
+<title>Manajemen Agunan Bankaltimtara</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
-body { font-family: Arial; background:#eef1f5; padding:20px; margin:0; }
+/* ===== Warna utama ===== */
+:root {
+    --soft-blue: #a8d0e6;
+    --soft-yellow: #fef9c3;
+    --soft-gray: #f1f3f5;
+    --btn-blue: #4a90e2;
+    --btn-yellow: #ffd54f;
+    --btn-hover: #3c7ecf;
+}
+
+body { font-family: Arial, sans-serif; background: var(--soft-gray); margin:0; padding:0; }
+.container { max-width: 900px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 .hidden { display:none; }
-.container { max-width:900px; margin:auto; background:#fff; padding:20px; border-radius:8px; }
-input, select, textarea, button { width:100%; padding:8px; margin:5px 0; }
-button { cursor:pointer; }
+
+/* ===== Header ===== */
+header { display:flex; align-items:center; margin-bottom:20px; }
+header img { height:50px; margin-right:15px; }
+header h1 { color: var(--btn-blue); }
+
+/* ===== Inputs & Buttons ===== */
+input, select, textarea { width:100%; padding:10px; margin:5px 0; border-radius:6px; border:1px solid #ccc; }
+button { padding:10px; border:none; border-radius:6px; cursor:pointer; margin:5px 0; font-weight:bold; }
+button:hover { opacity:0.9; }
+.btn-primary { background: var(--btn-blue); color:#fff; }
+.btn-yellow { background: var(--btn-yellow); color:#333; }
 .error { color:red; }
-.agunan-card { border:1px solid #ccc; padding:10px; margin:10px 0; border-radius:6px; display:flex; position:relative; }
-.agunan-images { display:flex; overflow-x:auto; max-width:150px; margin-right:10px; }
-.agunan-images img { width:150px; height:100px; object-fit:cover; margin-right:5px; }
+
+/* ===== Card Agunan ===== */
+.agunan-card { border:1px solid #ccc; padding:10px; margin:10px 0; border-radius:12px; display:flex; position:relative; background: var(--soft-yellow); box-shadow: 0 2px 6px rgba(0,0,0,0.1);}
+.agunan-images { display:flex; overflow-x:auto; max-width:200px; margin-right:10px; }
+.agunan-images img { width:150px; height:100px; object-fit:cover; margin-right:5px; border-radius:6px; }
 .agunan-info { flex:1; }
-.agunan-info h4 { margin:0 0 5px 0; }
+.agunan-info h4 { margin:0 0 5px 0; color: var(--btn-blue); }
 .admin-btns { position:absolute; top:5px; right:5px; display:flex; flex-direction:column; }
 .admin-btns button { margin:2px; font-size:12px; }
-.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; }
-.modal-content { background:#fff; padding:20px; border-radius:8px; max-width:600px; width:90%; max-height:90%; overflow:auto; }
-.close { float:right; cursor:pointer; color:red; font-weight:bold; }
+
+/* ===== Modal ===== */
+.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:100; }
+.modal-content { background:#fff; padding:20px; border-radius:12px; max-width:600px; width:90%; max-height:90%; overflow:auto; box-shadow:0 4px 15px rgba(0,0,0,0.2);}
+.close { float:right; cursor:pointer; color:red; font-weight:bold; font-size:18px; }
 .qrcode { margin-top:10px; }
-.preview img { width:100px; margin:5px; }
+.preview img { width:100px; margin:5px; border-radius:6px; }
 </style>
 </head>
 <body>
+
+<header>
+<img src="https://upload.wikimedia.org/wikipedia/id/4/46/Logo_Bankaltimtara.png" alt="Bankaltimtara">
+<h1>Manajemen Agunan</h1>
+</header>
 
 <!-- =================== LOGIN =================== -->
 <div id="pageLogin" class="container">
 <h2>Login Admin</h2>
 <input type="text" id="loginUser" placeholder="Username">
 <input type="password" id="loginPass" placeholder="Password">
-<button onclick="loginAdmin()">Login Admin</button>
+<button class="btn-primary" onclick="loginAdmin()">Login Admin</button>
 <p id="loginMsg" class="error"></p>
 <hr>
 <h3>Atau Masuk Sebagai Pengguna</h3>
-<button onclick="loginUser()">Masuk Sebagai Pengguna</button>
+<button class="btn-yellow" onclick="loginUser()">Masuk Sebagai Pengguna</button>
 </div>
 
 <!-- =================== INPUT AGUNAN =================== -->
@@ -86,8 +115,8 @@ button { cursor:pointer; }
 <label>QR Code Lokasi</label>
 <div id="qrcode"></div>
 
-<button onclick="submitAgunan()">Simpan Agunan</button>
-<button onclick="goToIndex()">Beranda</button>
+<button class="btn-primary" onclick="submitAgunan()">Simpan Agunan</button>
+<button class="btn-yellow" onclick="goToIndex()">Beranda</button>
 <p id="inputMsg" class="error"></p>
 </div>
 
@@ -113,8 +142,8 @@ button { cursor:pointer; }
 <input type="number" id="hargaMin" placeholder="Min" oninput="renderAgunan()">
 <input type="number" id="hargaMax" placeholder="Max" oninput="renderAgunan()">
 
-<button onclick="logout()">Logout</button>
-<button id="btnInputAgunan" onclick="goToInput()">Input Agunan</button>
+<button class="btn-yellow" onclick="logout()">Logout</button>
+<button id="btnInputAgunan" class="btn-primary" onclick="goToInput()">Input Agunan</button>
 
 <hr>
 <div id="agunanList"></div>
@@ -156,32 +185,22 @@ function showPage(id){
     document.getElementById("pageIndex").classList.add("hidden");
     document.getElementById(id).classList.remove("hidden");
 
-    // Tampilkan/hide tombol input sesuai role
     const role = localStorage.getItem("role");
     document.getElementById("btnInputAgunan").style.display = role==="admin" ? "inline-block" : "none";
 }
 
-// Proteksi halaman
-const roleNow = localStorage.getItem("role");
-if(roleNow) showPage("pageIndex");
-else showPage("pageLogin");
+if(localStorage.getItem("role")) showPage("pageIndex");
 
 // =================== INPUT AGUNAN ===================
 function showSpecFields(){
     const jenis = document.getElementById("jenisAgunan").value;
     if(jenis==="bangunan" || jenis==="tanah" || jenis==="bangunan_tanah"){
-        propSpec.style.display="block";
-        alatSpec.style.display="none";
+        propSpec.style.display="block"; alatSpec.style.display="none";
     } else if(jenis==="alat_berat" || jenis==="mesin" || jenis==="kendaraan"){
-        propSpec.style.display="none";
-        alatSpec.style.display="block";
-    } else {
-        propSpec.style.display="none";
-        alatSpec.style.display="none";
-    }
+        propSpec.style.display="none"; alatSpec.style.display="block";
+    } else { propSpec.style.display="none"; alatSpec.style.display="none"; }
 }
 
-// Preview gambar
 gambar.addEventListener('change', function(){
     preview.innerHTML = "";
     if(this.files.length>15){ alert("Maksimal 15 gambar"); this.value=""; return; }
@@ -196,7 +215,6 @@ gambar.addEventListener('change', function(){
     }
 });
 
-// QR Code
 alamat.addEventListener('input',function(){
     qrcode.innerHTML="";
     if(alamat.value.trim()!==""){
@@ -204,13 +222,10 @@ alamat.addEventListener('input',function(){
     }
 });
 
-// Submit agunan
 function submitAgunan(){
     const jenis = jenisAgunan.value;
     if(!jenis){ alert("Pilih jenis agunan"); return; }
-
     const data={jenis:jenis, spesifikasi:{}, alamat:alamat.value.trim(), gambar:[], kontak:{nama:namaKontak.value.trim(), wa:waKontak.value.trim()}, nilai: nilai.value};
-
     if(propSpec.style.display==="block"){
         data.spesifikasi.panjang = panjang.value;
         data.spesifikasi.lebar = lebar.value;
@@ -223,7 +238,6 @@ function submitAgunan(){
         data.spesifikasi.tahunBuat = tahunBuat.value;
         data.spesifikasi.tahunInvoice = tahunInvoice.value;
     }
-
     if(gambar.files.length>0){
         let count=0;
         for(let i=0;i<gambar.files.length;i++){
@@ -240,8 +254,7 @@ function submitAgunan(){
 
 function saveAgunan(data){
     let list = JSON.parse(localStorage.getItem("agunanList")||"[]");
-    if(data.index!=undefined){ list[data.index] = data; } // edit
-    else list.push(data);
+    if(data.index!=undefined){ list[data.index] = data; } else list.push(data);
     localStorage.setItem("agunanList", JSON.stringify(list));
     alert("Agunan berhasil disimpan!");
     renderAgunan();
@@ -255,13 +268,11 @@ function renderAgunan(){
     const jenisFilter=document.getElementById("filterJenis").value;
     const minHarga=parseFloat(document.getElementById("hargaMin").value);
     const maxHarga=parseFloat(document.getElementById("hargaMax").value);
-
     const role = localStorage.getItem("role");
     let html="";
     list.forEach((a,index)=>{
         const teksGabung = (a.jenis + " " + a.alamat + " " + a.kontak.nama).toLowerCase();
         let harga = parseFloat(a.nilai) || 0;
-
         if(teksGabung.includes(search) &&
            (jenisFilter==="" || a.jenis===jenisFilter) &&
            (isNaN(minHarga) || harga>=minHarga) &&
@@ -273,15 +284,13 @@ function renderAgunan(){
                 a.gambar.forEach(g=>{ imgs+=`<img src="${g}" alt="Gambar">`; });
                 imgs+=`</div>`;
             }
-
             let adminBtns="";
             if(role==="admin"){
                 adminBtns=`<div class="admin-btns">
-                    <button onclick="editAgunan(${index})">Edit</button>
-                    <button onclick="deleteAgunan(${index})">Hapus</button>
+                    <button class="btn-primary" onclick="editAgunan(${index})">Edit</button>
+                    <button class="btn-yellow" onclick="deleteAgunan(${index})">Hapus</button>
                 </div>`;
             }
-
             html+=`
             <div class="agunan-card">
                 ${imgs}
@@ -290,8 +299,8 @@ function renderAgunan(){
                     <p><strong>Alamat:</strong> ${a.alamat}</p>
                     <p><strong>Kontak:</strong> ${a.kontak.nama} (${a.kontak.wa})</p>
                     <p><strong>Nilai:</strong> Rp ${a.nilai}</p>
-                    <button onclick="hubungiWA('${a.kontak.wa}')">Hubungi</button>
-                    <button onclick="showDetail(${index})">Detail Agunan</button>
+                    <button class="btn-primary" onclick="hubungiWA('${a.kontak.wa}')">Hubungi</button>
+                    <button class="btn-yellow" onclick="showDetail(${index})">Detail Agunan</button>
                 </div>
                 ${adminBtns}
             </div>`;
@@ -334,7 +343,6 @@ function editAgunan(index){
     showPage("pageInput");
     jenisAgunan.value = a.jenis;
     showSpecFields();
-    // Set spesifikasi
     if(propSpec.style.display==="block"){
         panjang.value=a.spesifikasi.panjang||"";
         lebar.value=a.spesifikasi.lebar||"";
@@ -359,30 +367,9 @@ function editAgunan(index){
         img.src=g;
         preview.appendChild(img);
     });
-    a.index=index; // untuk menandai edit
+    a.index=index;
 }
 
 function deleteAgunan(index){
     if(confirm("Yakin ingin menghapus agunan ini?")){
-        let list = JSON.parse(localStorage.getItem("agunanList")||"[]");
-        list.splice(index,1);
-        localStorage.setItem("agunanList", JSON.stringify(list));
-        renderAgunan();
-    }
-}
-
-// =================== NAVIGASI ===================
-function goToInput(){ showPage("pageInput"); }
-function goToIndex(){ showPage("pageIndex"); renderAgunan(); }
-
-// =================== MODAL ===================
-function closeModal(){ modal.style.display="none"; }
-
-// =================== LOGOUT ===================
-function logout(){ localStorage.removeItem("role"); showPage("pageLogin"); }
-
-renderAgunan();
-</script>
-
-</body>
-</html>
+        let list = JSON
