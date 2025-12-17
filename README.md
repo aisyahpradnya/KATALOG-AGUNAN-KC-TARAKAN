@@ -1,324 +1,125 @@
-
+<!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Manajemen Agunan Bankaltimtara</title>
+<meta charset="UTF-8">
+<title>Manajemen Agunan</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
-:root{
-    --soft-blue: #a8d0e6; /* biru muda */
-    --soft-yellow: #fff9c3; /* kuning muda */
-    --btn-blue: #4a90e2;
-    --btn-yellow: #ffd54f;
-    --soft-gray: #fefcea;
-}
-body {
-    font-family: Arial, sans-serif;
-    background: var(--soft-yellow);
-    padding: 0; margin: 0;
-}
+body { font-family: Arial; background:#eef1f5; padding:20px; margin:0; }
 .hidden { display:none; }
-.container {
-    max-width:900px;
-    margin:auto;
-    background:#fff;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-}
-
-/* ===== HEADER ===== */
-header{
-    display:flex;
-    align-items:center;
-    padding:10px 20px;
-    background:var(--soft-blue);
-    color:#333;
-    border-bottom:2px solid var(--btn-blue);
-}
-header img{
-    height:50px;
-    margin-right:15px;
-}
-header h1{
-    margin:0;
-    font-size:24px;
-    color:#333;
-}
-
-/* ===== INPUT / BUTTONS ===== */
-input, select, textarea{
-    width:100%;
-    padding:10px;
-    margin:5px 0;
-    border-radius:8px;
-    border:1px solid #ccc;
-}
-button{
-    padding:10px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
-    margin:5px 0;
-}
-button:hover{ opacity:0.9; }
-.btn-primary{
-    background: var(--soft-blue);
-    color:#fff;
-}
-.btn-yellow{
-    background: var(--soft-yellow);
-    color:#333;
-    border:1px solid #ccc;
-}
-.error{
-    color:red;
-}
-
-/* ===== AGUNAN CARD ===== */
-.agunan-card{
-    border:1px solid var(--soft-blue);
-    padding:15px;
-    margin:10px 0;
-    border-radius:12px;
-    display:flex;
-    position:relative;
-    background:#fff;
-    box-shadow:0 2px 6px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
-.agunan-card:hover {
-    transform: scale(1.02);
-}
-.agunan-images{
-    display:flex;
-    overflow-x:auto;
-    max-width:200px;
-    margin-right:10px;
-}
-.agunan-images img{
-    width:150px;
-    height:100px;
-    object-fit:cover;
-    margin-right:5px;
-    border-radius:6px;
-}
-.agunan-info{
-    flex:1;
-}
-.agunan-info h4{
-    margin:0 0 5px 0;
-    color: var(--soft-blue);
-}
-.admin-btns{
-    position:absolute;
-    top:5px;
-    right:5px;
-    display:flex;
-    flex-direction:column;
-}
-.admin-btns button{
-    margin:2px;
-    font-size:12px;
-}
-
-/* ===== MODAL ===== */
-.modal{
-    display:none;
-    position:fixed;
-    top:0; left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.5);
-    justify-content:center;
-    align-items:center;
-    z-index:100;
-}
-.modal-content{
-    background:#fff;
-    padding:20px;
-    border-radius:12px;
-    max-width:600px;
-    width:90%;
-    max-height:90%;
-    overflow:auto;
-    box-shadow:0 4px 15px rgba(0,0,0,0.2);
-}
-.close{
-    float:right;
-    cursor:pointer;
-    color:red;
-    font-weight:bold;
-    font-size:18px;
-}
-.preview img{
-    width:100px;
-    margin:5px;
-    border-radius:6px;
-}
-
-/* ===== FLEX HORIZONTAL FOR RANGE INPUT ===== */
-.range-filter {
-    display:flex;
-    gap:10px;
-    margin-bottom:10px;
-}
-.range-filter input {
-    flex: 1;
-}
-
-/* ===== BUTTONS LAYOUT ===== */
-.buttons-row {
-    display:flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-/* ===== LABEL STYLING ===== */
-label {
-    font-weight: 600;
-}
-
-/* ===== LINKS BUTTON ===== */
-.link-button {
-    background:none;
-    border:none;
-    color: var(--btn-blue);
-    cursor:pointer;
-    text-decoration: underline;
-    padding:0;
-    font-size: 14px;
-}
-
-/* ===== SCROLLBAR FOR IMAGES ===== */
-.agunan-images::-webkit-scrollbar {
-    height: 6px;
-}
-.agunan-images::-webkit-scrollbar-thumb {
-    background-color: var(--soft-blue);
-    border-radius: 3px;
-}
+.container { max-width:900px; margin:auto; background:#fff; padding:20px; border-radius:8px; }
+input, select, textarea, button { width:100%; padding:8px; margin:5px 0; }
+button { cursor:pointer; }
+.error { color:red; }
+.agunan-card { border:1px solid #ccc; padding:10px; margin:10px 0; border-radius:6px; display:flex; position:relative; }
+.agunan-images { display:flex; overflow-x:auto; max-width:150px; margin-right:10px; }
+.agunan-images img { width:150px; height:100px; object-fit:cover; margin-right:5px; }
+.agunan-info { flex:1; }
+.agunan-info h4 { margin:0 0 5px 0; }
+.admin-btns { position:absolute; top:5px; right:5px; display:flex; flex-direction:column; }
+.admin-btns button { margin:2px; font-size:12px; }
+.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; }
+.modal-content { background:#fff; padding:20px; border-radius:8px; max-width:600px; width:90%; max-height:90%; overflow:auto; }
+.close { float:right; cursor:pointer; color:red; font-weight:bold; }
+.qrcode { margin-top:10px; }
+.preview img { width:100px; margin:5px; }
 </style>
 </head>
 <body>
 
-<header>
-    <img src="logo-bankaltimtara.png" alt="Bankaltimtara Logo" />
-    <h1>Manajemen Agunan Bankaltimtara</h1>
-</header>
-
-<!-- ========== LOGIN PAGE ========== -->
+<!-- =================== LOGIN =================== -->
 <div id="pageLogin" class="container">
-    <h2>Login Admin</h2>
-    <input type="text" id="loginUser" placeholder="Username" autocomplete="off" />
-    <input type="password" id="loginPass" placeholder="Password" autocomplete="off" />
-    <button class="btn-primary" onclick="loginAdmin()">Login Admin</button>
-    <p id="loginMsg" class="error"></p>
-    <hr />
-    <h3>Atau Masuk Sebagai Pengguna</h3>
-    <button class="btn-yellow" onclick="loginUser()">Masuk Sebagai Pengguna</button>
+<h2>Login Admin</h2>
+<input type="text" id="loginUser" placeholder="Username">
+<input type="password" id="loginPass" placeholder="Password">
+<button onclick="loginAdmin()">Login Admin</button>
+<p id="loginMsg" class="error"></p>
+<hr>
+<h3>Atau Masuk Sebagai Pengguna</h3>
+<button onclick="loginUser()">Masuk Sebagai Pengguna</button>
 </div>
 
-<!-- ========== INPUT AGUNAN PAGE ========== -->
+<!-- =================== INPUT AGUNAN =================== -->
 <div id="pageInput" class="container hidden">
-    <h2>Input / Edit Agunan</h2>
+<h2>Input / Edit Agunan</h2>
 
-    <label for="jenisAgunan">Jenis Agunan</label>
-    <select id="jenisAgunan" onchange="showSpecFields()">
-        <option value="">Pilih jenis</option>
-        <option value="bangunan">Bangunan</option>
-        <option value="tanah">Tanah</option>
-        <option value="bangunan_tanah">Bangunan & Tanah</option>
-        <option value="alat_berat">Alat Berat</option>
-        <option value="mesin">Mesin</option>
-        <option value="kendaraan">Kendaraan</option>
-    </select>
+<label>Jenis Agunan</label>
+<select id="jenisAgunan" onchange="showSpecFields()">
+    <option value="">Pilih jenis</option>
+    <option value="bangunan">Bangunan</option>
+    <option value="tanah">Tanah</option>
+    <option value="bangunan_tanah">Bangunan & Tanah</option>
+    <option value="alat_berat">Alat Berat</option>
+    <option value="mesin">Mesin</option>
+    <option value="kendaraan">Kendaraan</option>
+</select>
 
-    <div id="propSpec" style="display:none;">
-        <label>Panjang (m)</label>
-        <input type="number" id="panjang" min="0" />
-        <label>Lebar (m)</label>
-        <input type="number" id="lebar" min="0" />
-        <label>Luas (m²)</label>
-        <input type="number" id="luas" min="0" />
-        <label>Jenis Sertifikat</label>
-        <input type="text" id="sertifikat" placeholder="SHM, SHGB, dll" />
-    </div>
-
-    <div id="alatSpec" style="display:none;">
-        <label>Tipe</label>
-        <input type="text" id="tipe" />
-        <label>Merk</label>
-        <input type="text" id="merk" />
-        <label>Plate Number</label>
-        <input type="text" id="plate" />
-        <label>Tahun Pembuatan</label>
-        <input type="number" id="tahunBuat" min="1900" max="2099" />
-        <label>Tahun Invoice</label>
-        <input type="number" id="tahunInvoice" min="1900" max="2099" />
-    </div>
-
-    <label>Alamat Agunan</label>
-    <textarea id="alamat" placeholder="Masukkan alamat lengkap"></textarea>
-
-    <label>Upload Gambar (maks 15)</label>
-    <input type="file" id="gambar" multiple accept="image/*" />
-    <div class="preview" id="preview"></div>
-
-    <label>Nama Kontak</label>
-    <input type="text" id="namaKontak" />
-    <label>Nomor WA</label>
-    <input type="text" id="waKontak" placeholder="628xxxxxxxxxx" />
-
-    <label>Nilai Agunan (Rp)</label>
-    <input type="number" id="nilai" min="0" />
-
-    <label>QR Code Lokasi</label>
-    <div id="qrcode"></div>
-
-    <div class="buttons-row">
-        <button class="btn-primary" onclick="submitAgunan()">Simpan Agunan</button>
-        <button class="btn-yellow" onclick="goToIndex()">Beranda</button>
-    </div>
-    <p id="inputMsg" class="error"></p>
+<div id="propSpec" style="display:none;">
+    <label>Panjang (m)</label><input type="number" id="panjang">
+    <label>Lebar (m)</label><input type="number" id="lebar">
+    <label>Luas (m²)</label><input type="number" id="luas">
+    <label>Jenis Sertifikat</label><input type="text" id="sertifikat" placeholder="SHM, SHGB, dll">
 </div>
 
-<!-- ========== BERANDA PAGE ========== -->
+<div id="alatSpec" style="display:none;">
+    <label>Tipe</label><input type="text" id="tipe">
+    <label>Merk</label><input type="text" id="merk">
+    <label>Plate Number</label><input type="text" id="plate">
+    <label>Tahun Pembuatan</label><input type="number" id="tahunBuat">
+    <label>Tahun Invoice</label><input type="number" id="tahunInvoice">
+</div>
+
+<label>Alamat Agunan</label>
+<textarea id="alamat" placeholder="Masukkan alamat lengkap"></textarea>
+
+<label>Upload Gambar (maks 15)</label>
+<input type="file" id="gambar" multiple accept="image/*">
+<div class="preview" id="preview"></div>
+
+<label>Nama Kontak</label><input type="text" id="namaKontak">
+<label>Nomor WA</label><input type="text" id="waKontak" placeholder="628xxxxxxxxxx">
+
+<label>Nilai Agunan (Rp)</label><input type="number" id="nilai">
+
+<label>QR Code Lokasi</label>
+<div id="qrcode"></div>
+
+<button onclick="submitAgunan()">Simpan Agunan</button>
+<button onclick="goToIndex()">Beranda</button>
+<p id="inputMsg" class="error"></p>
+</div>
+
+<!-- =================== BERANDA =================== -->
 <div id="pageIndex" class="container hidden">
-    <h2>Beranda Agunan</h2>
+<h2>Beranda Agunan</h2>
 
-    <label for="searchInput">Pencarian</label>
-    <input type="text" id="searchInput" placeholder="Cari agunan..." oninput="renderAgunan()" />
+<label>Pencarian</label>
+<input type="text" id="searchInput" placeholder="Cari agunan..." oninput="renderAgunan()">
 
-    <label for="filterJenis">Filter Jenis</label>
-    <select id="filterJenis" onchange="renderAgunan()">
-        <option value="">Semua</option>
-        <option value="bangunan">Bangunan</option>
-        <option value="tanah">Tanah</option>
-        <option value="bangunan_tanah">Bangunan & Tanah</option>
-        <option value="alat_berat">Alat Berat</option>
-        <option value="mesin">Mesin</option>
-        <option value="kendaraan">Kendaraan</option>
-    </select>
+<label>Filter Jenis</label>
+<select id="filterJenis" onchange="renderAgunan()">
+    <option value="">Semua</option>
+    <option value="bangunan">Bangunan</option>
+    <option value="tanah">Tanah</option>
+    <option value="bangunan_tanah">Bangunan & Tanah</option>
+    <option value="alat_berat">Alat Berat</option>
+    <option value="mesin">Mesin</option>
+    <option value="kendaraan">Kendaraan</option>
+</select>
 
-    <label>Range Harga</label>
-    <div class="range-filter">
-        <input type="number" id="hargaMin" placeholder="Min" oninput="renderAgunan()" min="0" />
-        <input type="number" id="hargaMax" placeholder="Max" oninput="renderAgunan()" min="0" />
-    </div>
+<label>Range Harga</label>
+<input type="number" id="hargaMin" placeholder="Min" oninput="renderAgunan()">
+<input type="number" id="hargaMax" placeholder="Max" oninput="renderAgunan()">
 
-    <div class="buttons-row">
-        <button onclick="logout()" class="btn-yellow">Logout</button>
-        <button id="btnInputAgunan" class="btn-primary" onclick="goToInput()">Input Agunan</button>
-    </div>
+<button onclick="logout()">Logout</button>
+<button id="btnInputAgunan" onclick="goToInput()">Input Agunan</button>
 
-    <hr />
-    <div id="agunanList"></div>
+<hr>
+<div id="agunanList"></div>
 </div>
 
-<!-- ========== MODAL DETAIL ========= -->
+<!-- =================== MODAL DETAIL =================== -->
 <div id="modal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">×</span>
@@ -327,85 +128,63 @@ label {
 </div>
 
 <script>
-// ========== KONSTANTA LOGIN ==========
+// =================== LOGIN ===================
 const ADMIN_USER = "220241005388";
 const ADMIN_PASS = "220241005388";
 
-// ========== LOGIN ==========
 function loginAdmin(){
     const u = document.getElementById("loginUser").value.trim();
     const p = document.getElementById("loginPass").value.trim();
-    if(u === ADMIN_USER && p === ADMIN_PASS){
-        localStorage.setItem("role", "admin");
-        clearLoginFields();
+    if(u===ADMIN_USER && p===ADMIN_PASS){
+        localStorage.setItem("role","admin");
         showPage("pageIndex");
-        renderAgunan();
     } else {
         alert("Username atau password salah!");
     }
 }
+
 function loginUser(){
-    localStorage.setItem("role", "user");
-    clearLoginFields();
+    localStorage.setItem("role","user");
     showPage("pageIndex");
-    renderAgunan();
-}
-function clearLoginFields(){
-    document.getElementById("loginUser").value = "";
-    document.getElementById("loginPass").value = "";
 }
 
-// ========== HALAMAN & NAVIGASI ==========
+// =================== PAGE SWITCH ===================
 function showPage(id){
     document.getElementById("pageLogin").classList.add("hidden");
     document.getElementById("pageInput").classList.add("hidden");
     document.getElementById("pageIndex").classList.add("hidden");
     document.getElementById(id).classList.remove("hidden");
 
+    // Tampilkan/hide tombol input sesuai role
     const role = localStorage.getItem("role");
-    document.getElementById("btnInputAgunan").style.display = role === "admin" ? "inline-block" : "none";
+    document.getElementById("btnInputAgunan").style.display = role==="admin" ? "inline-block" : "none";
 }
 
-// Otomatis cek login saat load
-window.onload = function(){
-    const roleNow = localStorage.getItem("role");
-    if(roleNow){
-        showPage("pageIndex");
-        renderAgunan();
-    } else {
-        showPage("pageLogin");
-    }
-}
+// Proteksi halaman
+const roleNow = localStorage.getItem("role");
+if(roleNow) showPage("pageIndex");
+else showPage("pageLogin");
 
-// ========== TAMPILKAN FORM SPESIFIKASI ==========
+// =================== INPUT AGUNAN ===================
 function showSpecFields(){
     const jenis = document.getElementById("jenisAgunan").value;
-    const propSpec = document.getElementById("propSpec");
-    const alatSpec = document.getElementById("alatSpec");
-    if(jenis === "bangunan" || jenis === "tanah" || jenis === "bangunan_tanah"){
-        propSpec.style.display = "block";
-        alatSpec.style.display = "none";
-    } else if(jenis === "alat_berat" || jenis === "mesin" || jenis === "kendaraan"){
-        propSpec.style.display = "none";
-        alatSpec.style.display = "block";
+    if(jenis==="bangunan" || jenis==="tanah" || jenis==="bangunan_tanah"){
+        propSpec.style.display="block";
+        alatSpec.style.display="none";
+    } else if(jenis==="alat_berat" || jenis==="mesin" || jenis==="kendaraan"){
+        propSpec.style.display="none";
+        alatSpec.style.display="block";
     } else {
-        propSpec.style.display = "none";
-        alatSpec.style.display = "none";
+        propSpec.style.display="none";
+        alatSpec.style.display="none";
     }
 }
 
-// ========== PREVIEW GAMBAR ==========
-const gambar = document.getElementById("gambar");
-const preview = document.getElementById("preview");
-
+// Preview gambar
 gambar.addEventListener('change', function(){
     preview.innerHTML = "";
-    if(this.files.length > 15){
-        alert("Maksimal 15 gambar");
-        this.value = "";
-        return;
-    }
-    for(let i=0; i < this.files.length; i++){
+    if(this.files.length>15){ alert("Maksimal 15 gambar"); this.value=""; return; }
+    for(let i=0;i<this.files.length;i++){
         const reader = new FileReader();
         reader.onload = function(e){
             const img = document.createElement("img");
@@ -416,101 +195,193 @@ gambar.addEventListener('change', function(){
     }
 });
 
-// ========== QR CODE ALAMAT ==========
-const alamatInput = document.getElementById("alamat");
-const qrcodeDiv = document.getElementById("qrcode");
-
-alamatInput.addEventListener('input', function(){
-    qrcodeDiv.innerHTML = "";
-    if(alamatInput.value.trim() !== ""){
-        new QRCode(qrcodeDiv, alamatInput.value.trim());
+// QR Code
+alamat.addEventListener('input',function(){
+    qrcode.innerHTML="";
+    if(alamat.value.trim()!==""){
+        new QRCode(qrcode, alamat.value.trim());
     }
 });
 
-// ========== SIMPAN AGUNAN ==========
+// Submit agunan
 function submitAgunan(){
-    const jenis = document.getElementById("jenisAgunan").value;
-    if(!jenis){
-        alert("Pilih jenis agunan");
-        return;
+    const jenis = jenisAgunan.value;
+    if(!jenis){ alert("Pilih jenis agunan"); return; }
+
+    const data={jenis:jenis, spesifikasi:{}, alamat:alamat.value.trim(), gambar:[], kontak:{nama:namaKontak.value.trim(), wa:waKontak.value.trim()}, nilai: nilai.value};
+
+    if(propSpec.style.display==="block"){
+        data.spesifikasi.panjang = panjang.value;
+        data.spesifikasi.lebar = lebar.value;
+        data.spesifikasi.luas = luas.value;
+        data.spesifikasi.sertifikat = sertifikat.value;
+    } else if(alatSpec.style.display==="block"){
+        data.spesifikasi.tipe = tipe.value;
+        data.spesifikasi.merk = merk.value;
+        data.spesifikasi.plate = plate.value;
+        data.spesifikasi.tahunBuat = tahunBuat.value;
+        data.spesifikasi.tahunInvoice = tahunInvoice.value;
     }
 
-    const data = {
-        jenis: jenis,
-        spesifikasi: {},
-        alamat: alamatInput.value.trim(),
-        gambar: [],
-        kontak: {
-            nama: document.getElementById("namaKontak").value.trim(),
-            wa: document.getElementById("waKontak").value.trim()
-        },
-        nilai: document.getElementById("nilai").value.trim(),
-    };
-
-    const propSpec = document.getElementById("propSpec");
-    const alatSpec = document.getElementById("alatSpec");
-
-    if(propSpec.style.display === "block"){
-        data.spesifikasi.panjang = document.getElementById("panjang").value.trim();
-        data.spesifikasi.lebar = document.getElementById("lebar").value.trim();
-        data.spesifikasi.luas = document.getElementById("luas").value.trim();
-        data.spesifikasi.sertifikat = document.getElementById("sertifikat").value.trim();
-    } else if(alatSpec.style.display === "block"){
-        data.spesifikasi.tipe = document.getElementById("tipe").value.trim();
-        data.spesifikasi.merk = document.getElementById("merk").value.trim();
-        data.spesifikasi.plate = document.getElementById("plate").value.trim();
-        data.spesifikasi.tahunBuat = document.getElementById("tahunBuat").value.trim();
-        data.spesifikasi.tahunInvoice = document.getElementById("tahunInvoice").value.trim();
-    }
-
-    const files = gambar.files;
-    if(files.length > 0){
-        let count = 0;
-        for(let i=0; i < files.length; i++){
+    if(gambar.files.length>0){
+        let count=0;
+        for(let i=0;i<gambar.files.length;i++){
             const reader = new FileReader();
-            reader.onload = function(e){
+            reader.onload=function(e){
                 data.gambar.push(e.target.result);
                 count++;
-                if(count === files.length){
-                    saveAgunan(data);
-                }
+                if(count===gambar.files.length) saveAgunan(data);
             }
-            reader.readAsDataURL(files[i]);
+            reader.readAsDataURL(gambar.files[i]);
         }
-    } else {
-        saveAgunan(data);
-    }
+    } else { saveAgunan(data); }
 }
 
 function saveAgunan(data){
-    let list = JSON.parse(localStorage.getItem("agunanList") || "[]");
-    if(data.index !== undefined){
-        list[data.index] = data; // update
-    } else {
-        list.push(data); // new
-    }
+    let list = JSON.parse(localStorage.getItem("agunanList")||"[]");
+    if(data.index!=undefined){ list[data.index] = data; } // edit
+    else list.push(data);
     localStorage.setItem("agunanList", JSON.stringify(list));
     alert("Agunan berhasil disimpan!");
-    resetInputForm();
     renderAgunan();
     showPage("pageIndex");
 }
 
-// ========== RESET FORM INPUT ==========
-function resetInputForm(){
-    document.getElementById("jenisAgunan").value = "";
+// =================== BERANDA ===================
+function renderAgunan(){
+    let list = JSON.parse(localStorage.getItem("agunanList")||"[]");
+    const search=document.getElementById("searchInput").value.toLowerCase();
+    const jenisFilter=document.getElementById("filterJenis").value;
+    const minHarga=parseFloat(document.getElementById("hargaMin").value);
+    const maxHarga=parseFloat(document.getElementById("hargaMax").value);
+
+    const role = localStorage.getItem("role");
+    let html="";
+    list.forEach((a,index)=>{
+        const teksGabung = (a.jenis + " " + a.alamat + " " + a.kontak.nama).toLowerCase();
+        let harga = parseFloat(a.nilai) || 0;
+
+        if(teksGabung.includes(search) &&
+           (jenisFilter==="" || a.jenis===jenisFilter) &&
+           (isNaN(minHarga) || harga>=minHarga) &&
+           (isNaN(maxHarga) || harga<=maxHarga)
+        ){
+            let imgs="";
+            if(a.gambar.length>0){
+                imgs=`<div class="agunan-images">`;
+                a.gambar.forEach(g=>{ imgs+=`<img src="${g}" alt="Gambar">`; });
+                imgs+=`</div>`;
+            }
+
+            let adminBtns="";
+            if(role==="admin"){
+                adminBtns=`<div class="admin-btns">
+                    <button onclick="editAgunan(${index})">Edit</button>
+                    <button onclick="deleteAgunan(${index})">Hapus</button>
+                </div>`;
+            }
+
+            html+=`
+            <div class="agunan-card">
+                ${imgs}
+                <div class="agunan-info">
+                    <h4>${a.jenis.toUpperCase()}</h4>
+                    <p><strong>Alamat:</strong> ${a.alamat}</p>
+                    <p><strong>Kontak:</strong> ${a.kontak.nama} (${a.kontak.wa})</p>
+                    <p><strong>Nilai:</strong> Rp ${a.nilai}</p>
+                    <button onclick="hubungiWA('${a.kontak.wa}')">Hubungi</button>
+                    <button onclick="showDetail(${index})">Detail Agunan</button>
+                </div>
+                ${adminBtns}
+            </div>`;
+        }
+    });
+    agunanList.innerHTML=html||"<p>Tidak ada agunan ditemukan.</p>";
+}
+
+function hubungiWA(wa){
+    if(!wa) return alert("Nomor WA tidak tersedia!");
+    let nomor = wa.replace(/[^0-9]/g,'');
+    window.open("https://wa.me/"+nomor,"_blank");
+}
+
+function showDetail(index){
+    let list=JSON.parse(localStorage.getItem("agunanList")||"[]");
+    let a=list[index];
+    let html=`<h3>${a.jenis.toUpperCase()}</h3>`;
+    html+=`<p><strong>Alamat:</strong> ${a.alamat}</p>`;
+    html+=`<p><strong>Kontak:</strong> ${a.kontak.nama} (${a.kontak.wa})</p>`;
+    html+=`<p><strong>Nilai:</strong> Rp ${a.nilai}</p>`;
+    html+=`<p><strong>Spesifikasi:</strong></p><ul>`;
+    for(const key in a.spesifikasi){ html+=`<li>${key}: ${a.spesifikasi[key]}</li>`;}
+    html+=`</ul>`;
+    if(a.gambar.length>0){
+        html+=`<div class="agunan-images">`;
+        a.gambar.forEach(g=>{ html+=`<img src="${g}" alt="Gambar">`; });
+        html+=`</div>`;
+    }
+    html+=`<div class="qrcode" id="modalQR"></div>`;
+    modalBody.innerHTML=html;
+    new QRCode(document.getElementById("modalQR"), a.alamat);
+    modal.style.display="flex";
+}
+
+// =================== EDIT / DELETE ===================
+function editAgunan(index){
+    let list = JSON.parse(localStorage.getItem("agunanList")||"[]");
+    const a = list[index];
+    showPage("pageInput");
+    jenisAgunan.value = a.jenis;
     showSpecFields();
-    document.getElementById("panjang").value = "";
-    document.getElementById("lebar").value = "";
-    document.getElementById("luas").value = "";
-    document.getElementById("sertifikat").value = "";
-    document.getElementById("tipe").value = "";
-    document.getElementById("merk").value = "";
-    document.getElementById("plate").value = "";
-    document.getElementById("tahunBuat").value = "";
-    document.getElementById("tahunInvoice").value = "";
-    alamatInput.value = "";
-    qrcodeDiv.innerHTML = "";
-    gambar.value = "";
-    preview.innerHTML = "";
-    document.getElement
+    // Set spesifikasi
+    if(propSpec.style.display==="block"){
+        panjang.value=a.spesifikasi.panjang||"";
+        lebar.value=a.spesifikasi.lebar||"";
+        luas.value=a.spesifikasi.luas||"";
+        sertifikat.value=a.spesifikasi.sertifikat||"";
+    } else if(alatSpec.style.display==="block"){
+        tipe.value=a.spesifikasi.tipe||"";
+        merk.value=a.spesifikasi.merk||"";
+        plate.value=a.spesifikasi.plate||"";
+        tahunBuat.value=a.spesifikasi.tahunBuat||"";
+        tahunInvoice.value=a.spesifikasi.tahunInvoice||"";
+    }
+    alamat.value=a.alamat;
+    namaKontak.value=a.kontak.nama;
+    waKontak.value=a.kontak.wa;
+    nilai.value=a.nilai;
+    qrcode.innerHTML="";
+    new QRCode(qrcode, a.alamat);
+    preview.innerHTML="";
+    a.gambar.forEach(g=>{
+        const img=document.createElement("img");
+        img.src=g;
+        preview.appendChild(img);
+    });
+    a.index=index; // untuk menandai edit
+}
+
+function deleteAgunan(index){
+    if(confirm("Yakin ingin menghapus agunan ini?")){
+        let list = JSON.parse(localStorage.getItem("agunanList")||"[]");
+        list.splice(index,1);
+        localStorage.setItem("agunanList", JSON.stringify(list));
+        renderAgunan();
+    }
+}
+
+// =================== NAVIGASI ===================
+function goToInput(){ showPage("pageInput"); }
+function goToIndex(){ showPage("pageIndex"); renderAgunan(); }
+
+// =================== MODAL ===================
+function closeModal(){ modal.style.display="none"; }
+
+// =================== LOGOUT ===================
+function logout(){ localStorage.removeItem("role"); showPage("pageLogin"); }
+
+renderAgunan();
+</script>
+
+</body>
+</html>
